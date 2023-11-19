@@ -3,6 +3,7 @@
 PantryChef is a simple, intuitive recipe app designed to help you find the perfect dish to cook based on the ingredients you have on hand.
 
 <img width="234" alt="Снимок экрана 2023-11-19 в 02 55 58" src="https://github.com/georgyia/PantryChef/assets/108485851/0f1e9927-a137-4c3b-81b9-cd6d50026435">
+<img width="240" alt="Снимок экрана 2023-11-19 в 13 27 38" src="https://github.com/georgyia/PantryChef/assets/108485851/4bb2613e-8f6c-4bbf-8e3a-0a3cb5769013">
 
 ## Features
 
