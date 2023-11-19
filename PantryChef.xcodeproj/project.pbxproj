@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A482300E2B099A0E009CBE83 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A482300D2B099A0E009CBE83 /* StartView.swift */; };
 		A4D41E4A2B0991090033AB3E /* PantryChefApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D41E492B0991090033AB3E /* PantryChefApp.swift */; };
 		A4D41E4C2B0991090033AB3E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D41E4B2B0991090033AB3E /* ContentView.swift */; };
 		A4D41E4E2B09910A0033AB3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4D41E4D2B09910A0033AB3E /* Assets.xcassets */; };
@@ -14,6 +15,7 @@
 		A4D41E5B2B09910A0033AB3E /* PantryChefTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D41E5A2B09910A0033AB3E /* PantryChefTests.swift */; };
 		A4D41E652B09910A0033AB3E /* PantryChefUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D41E642B09910A0033AB3E /* PantryChefUITests.swift */; };
 		A4D41E672B09910A0033AB3E /* PantryChefUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D41E662B09910A0033AB3E /* PantryChefUITestsLaunchTests.swift */; };
+		A4D41E742B0992520033AB3E /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D41E732B0992520033AB3E /* LoginView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A482300D2B099A0E009CBE83 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		A4D41E462B0991090033AB3E /* PantryChef.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PantryChef.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4D41E492B0991090033AB3E /* PantryChefApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryChefApp.swift; sourceTree = "<group>"; };
 		A4D41E4B2B0991090033AB3E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -44,6 +47,7 @@
 		A4D41E602B09910A0033AB3E /* PantryChefUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PantryChefUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4D41E642B09910A0033AB3E /* PantryChefUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryChefUITests.swift; sourceTree = "<group>"; };
 		A4D41E662B09910A0033AB3E /* PantryChefUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryChefUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		A4D41E732B0992520033AB3E /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,8 @@
 				A4D41E4B2B0991090033AB3E /* ContentView.swift */,
 				A4D41E4D2B09910A0033AB3E /* Assets.xcassets */,
 				A4D41E4F2B09910A0033AB3E /* Preview Content */,
+				A4D41E732B0992520033AB3E /* LoginView.swift */,
+				A482300D2B099A0E009CBE83 /* StartView.swift */,
 			);
 			path = PantryChef;
 			sourceTree = "<group>";
@@ -257,8 +263,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A4D41E742B0992520033AB3E /* LoginView.swift in Sources */,
 				A4D41E4C2B0991090033AB3E /* ContentView.swift in Sources */,
 				A4D41E4A2B0991090033AB3E /* PantryChefApp.swift in Sources */,
+				A482300E2B099A0E009CBE83 /* StartView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
