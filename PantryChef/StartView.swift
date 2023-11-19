@@ -78,7 +78,7 @@ struct BottomView: View {
     var body: some View {
         VStack {
             Spacer()
-            NavigationLink(destination: LoginView()) {
+            NavigationLink(destination: LoginView().navigationBarBackButtonHidden(true)) {
                 Text("Start cooking")
                     .frame(width: UIScreen.main.bounds.width * 0.5)
                     .padding()
