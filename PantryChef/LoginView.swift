@@ -7,12 +7,16 @@
 //
 
 import SwiftUI
+import Firebase
+
 
 struct LoginView: View {
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var isSignedIn: Bool = false
+    @State private var viewModel = SignInEmailViewModel()
     @State private var passwordForgot: Bool = false
+    @State private var showingAlert = false
+    @State private var alertMessage = ""
+    @Binding var showSignInView: Bool
+    @State private var signedIn: Bool = false
     
     var body: some View {
         NavigationView {
@@ -28,20 +32,20 @@ struct LoginView: View {
                     .fontWeight(.medium)
                     .padding(.bottom, 70)
                 
-                TextField("Enter Email", text: $email)
+                TextField("Enter Email", text: $viewModel.email)
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(10)
                     .padding(.bottom, 20)
                 
-                SecureField("Enter Password", text: $password)
+                SecureField("Enter Password", text: $viewModel.password)
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(10)
                     .padding(.bottom, 10)
                 HStack {
                     Button(action: {
-                        self.isSignedIn = true
+                        self.passwordForgot = true
                     }) {
                         Text("Forgot Password?")
                             .font(.footnote)
@@ -51,7 +55,13 @@ struct LoginView: View {
                 }
                 .padding(.bottom, 20)
                 Button(action: {
-                    self.isSignedIn = true
+                    let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
+                    self.showSignInView = authUser == nil
+                    print("User - \(String(describing: authUser))")
+                    if(!(self.showSignInView)){
+                        self.signedIn = true
+                    }
+                    print("Signed In - \(self.signedIn)")
                 }) {
                     HStack {
                         Text("Sign In")
@@ -63,6 +73,9 @@ struct LoginView: View {
                     .padding()
                     .background(Color(red: 113/255, green: 177/255, blue: 161/255))
                     .cornerRadius(10)
+                }
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Error"), message: Text(self.alertMessage), dismissButton: .default(Text("OK")))
                 }
                 HStack {
                     Spacer()
@@ -108,14 +121,14 @@ struct LoginView: View {
                 HStack {
                     Text("Don’t have an account?")
                         .font(.footnote)
-                    NavigationLink(destination: SignUpView()) {
+                    NavigationLink(destination: SignUpView(showSignInView: $showSignInView)) {
                         Text("Sign up")
                             .font(.footnote)
                             .foregroundColor(.orange)
                     }
                 }
                 .padding(.bottom, 50)
-                NavigationLink(destination: HomeView(), isActive: $isSignedIn) {
+                NavigationLink (destination: HomeView(showSignInView: $showSignInView), isActive: $signedIn){
                     EmptyView()
                 }
                 NavigationLink(destination: PasswordForgotView(), isActive: $passwordForgot) {
@@ -130,11 +143,11 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
-        LoginView()
+        LoginView(showSignInView: .constant(false))
     }
 }
 
 #Preview {
-    LoginView()
+    LoginView(showSignInView: .constant(false))
 }
 

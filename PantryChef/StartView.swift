@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct StartView: View {
+    @Binding var showSignInView: Bool
     var body: some View {
         NavigationView {
             ZStack {
                 BackgroundView()
-                StartPageContentView()
+                StartPageContentView(showSignInView: $showSignInView)
             }
         }
     }
@@ -32,11 +33,12 @@ struct BackgroundView: View {
 }
 
 struct StartPageContentView: View {
+    @Binding var showSignInView: Bool
     var body: some View {
         VStack {
             TopView()
             MiddleView()
-            BottomView()
+            BottomView(showSignInView: $showSignInView)
         }
     }
 }
@@ -75,10 +77,11 @@ struct MiddleView: View {
 }
 
 struct BottomView: View {
+    @Binding var showSignInView: Bool
     var body: some View {
         VStack {
             Spacer()
-            NavigationLink(destination: LoginView().navigationBarBackButtonHidden(true)) {
+            NavigationLink(destination: LoginView(showSignInView: $showSignInView).navigationBarBackButtonHidden(true)) {
                 Text("Start cooking")
                     .frame(width: UIScreen.main.bounds.width * 0.5)
                     .padding()
@@ -93,6 +96,6 @@ struct BottomView: View {
 
 struct StartView_Previews: PreviewProvider {
     static var previews: some View {
-        StartView()
+        StartView(showSignInView: .constant(false))
     }
 }

@@ -6,13 +6,18 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct SignUpView: View {
-    @State private var email: String = ""
-    @State private var password: String = ""
-    @State private var isSignedIn: Bool = false
+    
+    @State private var viewModel = SignInEmailViewModel()
+    @State private var name: String = ""
     @State private var passwordForgot: Bool = false
     @State private var termsAccepted: Bool = false
+    @State private var confirmPassword: String = ""
+    @State private var showingAlert = false
+    @State private var alertMessage = ""
+    @Binding var showSignInView: Bool
     
     var body: some View {
         NavigationView {
@@ -23,25 +28,25 @@ struct SignUpView: View {
                     .padding(.top, 70)
                     .padding(.bottom, 50)
                 
-                TextField("Enter Name", text: $email)
+                TextField("Enter Name", text: $name)
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(10)
                     .padding(.bottom, 20)
                 
-                TextField("Enter Email", text: $email)
+                TextField("Enter Email", text: $viewModel.email)
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(10)
                     .padding(.bottom, 20)
                 
-                SecureField("Enter Password", text: $password)
+                SecureField("Enter Password", text: $viewModel.password)
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(10)
                     .padding(.bottom, 20)
                 
-                SecureField("Confirm Password", text: $password)
+                SecureField("Confirm Password", text: $confirmPassword)
                     .padding()
                     .background(Color(.systemGray6))
                     .cornerRadius(10)
@@ -72,7 +77,15 @@ struct SignUpView: View {
                 }
                 .padding(.bottom, 20)
                 Button(action: {
-                    self.isSignedIn = true
+                    if viewModel.password != self.confirmPassword {
+                        self.alertMessage = "Passwords do not match"
+                        self.showingAlert = true
+                    } else if !self.termsAccepted {
+                        self.alertMessage = "You must accept the terms and conditions"
+                        self.showingAlert = true
+                    } else {
+                        self.showSignInView = viewModel.signIn()
+                    }
                 }) {
                     HStack {
                         Text("Sign Up")
@@ -85,9 +98,12 @@ struct SignUpView: View {
                     .background(Color(red: 113/255, green: 177/255, blue: 161/255))
                     .cornerRadius(10)
                 }
+                .alert(isPresented: $showingAlert) {
+                    Alert(title: Text("Error"), message: Text(self.alertMessage), dismissButton: .default(Text("OK")))
+                }
                 .padding(.bottom, 150)
-                NavigationLink(destination: HomeView(), isActive: $isSignedIn) {
-                    EmptyView()
+                NavigationStack {
+                    HomeView(showSignInView: $showSignInView)
                 }
                 NavigationLink(destination: PasswordForgotView(), isActive: $passwordForgot) {
                     EmptyView()
@@ -101,5 +117,5 @@ struct SignUpView: View {
 }
 
 #Preview {
-    SignUpView()
+    SignUpView(showSignInView: .constant(false))
 }
