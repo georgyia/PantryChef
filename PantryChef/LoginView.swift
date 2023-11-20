@@ -1,4 +1,3 @@
-
 //
 //  LoginView.swift
 //  PantryChef
@@ -9,9 +8,11 @@
 import SwiftUI
 import Firebase
 
-
+// LoginView is the view where users can sign in to the app.
 struct LoginView: View {
+    // ViewModel for handling sign in with email.
     @State private var viewModel = SignInEmailViewModel()
+    // State variables for handling password reset, showing alerts, and navigation.
     @State private var passwordForgot: Bool = false
     @State private var showingAlert = false
     @State private var alertMessage = ""
@@ -21,6 +22,7 @@ struct LoginView: View {
     var body: some View {
         NavigationView {
             VStack {
+                // Welcome texts.
                 Text("Hello,")
                     .font(.largeTitle)
                     .fontWeight(.bold)
@@ -32,6 +34,7 @@ struct LoginView: View {
                     .fontWeight(.medium)
                     .padding(.bottom, 70)
                 
+                // Text fields for email and password input.
                 TextField("Enter Email", text: $viewModel.email)
                     .padding()
                     .background(Color(.systemGray6))
@@ -43,6 +46,8 @@ struct LoginView: View {
                     .background(Color(.systemGray6))
                     .cornerRadius(10)
                     .padding(.bottom, 10)
+                
+                // Button for password reset.
                 HStack {
                     Button(action: {
                         self.passwordForgot = true
@@ -54,14 +59,14 @@ struct LoginView: View {
                     Spacer()
                 }
                 .padding(.bottom, 20)
+                
+                // Sign in button.
                 Button(action: {
                     let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
                     self.showSignInView = authUser == nil
-                    print("User - \(String(describing: authUser))")
                     if(!(self.showSignInView)){
                         self.signedIn = true
                     }
-                    print("Signed In - \(self.signedIn)")
                 }) {
                     HStack {
                         Text("Sign In")
@@ -77,6 +82,8 @@ struct LoginView: View {
                 .alert(isPresented: $showingAlert) {
                     Alert(title: Text("Error"), message: Text(self.alertMessage), dismissButton: .default(Text("OK")))
                 }
+                
+                // Sign in with social media buttons.
                 HStack {
                     Spacer()
                         .frame(width: 50, height: 1)
@@ -91,6 +98,7 @@ struct LoginView: View {
                 .padding(.top, 20)
                 
                 HStack {
+                    // Google sign in button.
                     Button(action: {
                     }) {
                         HStack {
@@ -103,6 +111,7 @@ struct LoginView: View {
                     .background(Color.white)
                     .cornerRadius(10)
                     
+                    // Facebook sign in button.
                     Button(action: {
                     }) {
                         HStack {
@@ -118,6 +127,7 @@ struct LoginView: View {
                 
                 Spacer()
                 
+                // Navigation to SignUpView.
                 HStack {
                     Text("Don’t have an account?")
                         .font(.footnote)
@@ -128,9 +138,13 @@ struct LoginView: View {
                     }
                 }
                 .padding(.bottom, 50)
+                
+                // Navigation to HomeView after successful sign in.
                 NavigationLink (destination: HomeView(showSignInView: $showSignInView), isActive: $signedIn){
                     EmptyView()
                 }
+                
+                // Navigation to PasswordForgotView.
                 NavigationLink(destination: PasswordForgotView(), isActive: $passwordForgot) {
                     EmptyView()
                 }
@@ -141,6 +155,7 @@ struct LoginView: View {
     }
 }
 
+// Preview of the LoginView for SwiftUI design canvas.
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView(showSignInView: .constant(false))
@@ -150,4 +165,3 @@ struct LoginView_Previews: PreviewProvider {
 #Preview {
     LoginView(showSignInView: .constant(false))
 }
-

@@ -3,11 +3,13 @@
 //  PantryChef
 //
 //  Created by Georgy Chomakhashvili on 19.11.23.
-//import SwiftUI
+//
 
 import SwiftUI
 
+// StartView is the initial view that users see when they open the app.
 struct StartView: View {
+    // Binding to control the display of the SignInView.
     @Binding var showSignInView: Bool
     var body: some View {
         NavigationView {
@@ -19,6 +21,7 @@ struct StartView: View {
     }
 }
 
+// BackgroundView displays the background image and a text overlay.
 struct BackgroundView: View {
     var body: some View {
         ZStack {
@@ -32,7 +35,9 @@ struct BackgroundView: View {
     }
 }
 
+// StartPageContentView contains the main content of the start page.
 struct StartPageContentView: View {
+    // Binding to control the display of the SignInView.
     @Binding var showSignInView: Bool
     var body: some View {
         VStack {
@@ -43,15 +48,18 @@ struct StartPageContentView: View {
     }
 }
 
+// TopView displays the logo or main image.
 struct TopView: View {
-    var body: some View {        Image("LoginViewPicCook")
+    var body: some View {
+        Image("LoginViewPicCook")
             .resizable()
             .scaledToFit()
             .frame(width: UIScreen.main.bounds.width * 0.25, height: UIScreen.main.bounds.height * 0.25)
-            .padding(.top, 50) // Add padding to move the image down
+            .padding(.top, 50)
     }
 }
 
+// MiddleView displays the main text content.
 struct MiddleView: View {
     var body: some View {
         VStack {
@@ -66,7 +74,7 @@ struct MiddleView: View {
                 .bold()
                 .multilineTextAlignment(.center)
                 .fixedSize(horizontal: false, vertical: true)
-                .padding(.top, 150) // Add padding to move the text down
+                .padding(.top, 150)
             Spacer()
             Text("Simple way to find Tasty Recipe")
                 .foregroundColor(.white)
@@ -76,11 +84,14 @@ struct MiddleView: View {
     }
 }
 
+// BottomView contains the navigation link to the SignInView.
 struct BottomView: View {
+    // Binding to control the display of the SignInView.
     @Binding var showSignInView: Bool
     var body: some View {
         VStack {
             Spacer()
+            // Navigation link to the LoginView(Sign In).
             NavigationLink(destination: LoginView(showSignInView: $showSignInView).navigationBarBackButtonHidden(true)) {
                 Text("Start cooking")
                     .frame(width: UIScreen.main.bounds.width * 0.5)
@@ -94,6 +105,7 @@ struct BottomView: View {
     }
 }
 
+// Preview of the StartView for SwiftUI design canvas.
 struct StartView_Previews: PreviewProvider {
     static var previews: some View {
         StartView(showSignInView: .constant(false))
