@@ -28,6 +28,26 @@ final class AuthenticationManager{
         
     }
     
+    // Function to log in a user with email and password.
+    func login(withEmail email: String, password: String, completion: @escaping (Bool) -> Void) {
+        // Call the signIn method of Firebase Auth.
+        // This method is asynchronous and uses a completion handler to handle the result.
+        Auth.auth().signIn(withEmail: email, password: password) { (result, error) in
+            // The completion handler is called when the sign-in operation is finished.
+            // It has two parameters: 'result' and 'error'.
+            // 'result' is the result of the sign-in operation.
+            // 'error' is any error that occurred during the sign-in operation.
+            if let error = error {
+                print(error.localizedDescription)
+                completion(false)
+            } else {
+                print("success")
+                completion(true)
+            }
+        }
+    }
+    
+    
     // Function to get the currently authenticated user.
     func getAuthenticatedUser() throws -> AuthDataResultModel{
         // Check if there's a currently authenticated user.

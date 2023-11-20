@@ -62,10 +62,19 @@ struct LoginView: View {
                 
                 // Sign in button.
                 Button(action: {
-                    let authUser = try? AuthenticationManager.shared.getAuthenticatedUser()
-                    self.showSignInView = authUser == nil
-                    if(!(self.showSignInView)){
-                        self.signedIn = true
+                    AuthenticationManager.shared.login(withEmail: $viewModel.email.wrappedValue, password: $viewModel.password.wrappedValue) { success in
+                        // The completion handler is called when the login operation is finished.
+                        // The 'success' parameter indicates whether the login was successful.
+                        if success {
+                            print("Login successful")
+                            // UI updates should be done on the main thread.
+                            DispatchQueue.main.async {
+                                self.showSignInView = false
+                                self.signedIn = true
+                            }
+                        } else {
+                            print("Login failed")
+                        }
                     }
                 }) {
                     HStack {

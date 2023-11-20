@@ -37,4 +37,5 @@ class SignInEmailViewModel: ObservableObject{
         }
         return false
     }
+    
 }
