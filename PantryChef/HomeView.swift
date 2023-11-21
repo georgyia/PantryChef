@@ -172,7 +172,7 @@ struct HomeView: View {
                                 print(error)
                             }
                         }
-                    }
+                    }.foregroundColor(Color(red: 113/255, green: 177/255, blue: 161/255))
                 }
                 .tabItem {
                     Label("Settings", systemImage: "gear")
