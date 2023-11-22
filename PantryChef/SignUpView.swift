@@ -116,11 +116,6 @@ struct SignUpView: View {
                 NavigationStack {
                     HomeView(showSignInView: $showSignInView)
                 }
-                
-                // Navigation to PasswordForgotView.
-                NavigationLink(destination: PasswordForgotView(), isActive: $passwordForgot) {
-                    EmptyView()
-                }
             }
         }
         .padding()

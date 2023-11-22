@@ -49,13 +49,34 @@ struct LoginView: View {
                 
                 // Button for password reset.
                 HStack {
-                    Button(action: {
+                    Button("Forgot Password?") {
                         self.passwordForgot = true
-                    }) {
-                        Text("Forgot Password?")
-                            .font(.footnote)
-                            .foregroundColor(.orange)
                     }
+                    .sheet(isPresented: $passwordForgot) {
+                        TextField("Enter Email", text: $viewModel.email)
+                            .padding()
+                            .background(Color(.systemGray6))
+                            .cornerRadius(10)
+                            .padding(.bottom, 20)
+                            .foregroundColor(.black)
+                        // Button to submit the password reset request.
+                        Button(action: {
+                            Task{
+                                do{
+                                    try await viewModel.resetPassword(email: viewModel.email)
+                                }catch{
+                                    print(error)
+                                }
+                            }
+                        }) {
+                            Text("Reset Password")
+                                .foregroundColor(.white)
+                            
+                        }.padding()
+                            .background(Color(red: 113/255, green: 177/255, blue: 161/255))
+                            .cornerRadius(10)
+                    }.font(.footnote)
+                        .foregroundColor(.orange)
                     Spacer()
                 }
                 .padding(.bottom, 20)
@@ -150,11 +171,6 @@ struct LoginView: View {
                 
                 // Navigation to HomeView after successful sign in.
                 NavigationLink (destination: HomeView(showSignInView: $showSignInView), isActive: $signedIn){
-                    EmptyView()
-                }
-                
-                // Navigation to PasswordForgotView.
-                NavigationLink(destination: PasswordForgotView(), isActive: $passwordForgot) {
                     EmptyView()
                 }
             }

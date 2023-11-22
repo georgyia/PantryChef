@@ -18,7 +18,6 @@
 		A482300E2B099A0E009CBE83 /* StartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A482300D2B099A0E009CBE83 /* StartView.swift */; };
 		A4CCA01D2B0A35700066D6E9 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CCA01C2B0A35700066D6E9 /* SignUpView.swift */; };
 		A4CCA01F2B0A357D0066D6E9 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CCA01E2B0A357D0066D6E9 /* HomeView.swift */; };
-		A4CCA0212B0A35E00066D6E9 /* PasswordForgotView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4CCA0202B0A35E00066D6E9 /* PasswordForgotView.swift */; };
 		A4D41E4A2B0991090033AB3E /* PantryChefApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D41E492B0991090033AB3E /* PantryChefApp.swift */; };
 		A4D41E4C2B0991090033AB3E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A4D41E4B2B0991090033AB3E /* ContentView.swift */; };
 		A4D41E4E2B09910A0033AB3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A4D41E4D2B09910A0033AB3E /* Assets.xcassets */; };
@@ -54,7 +53,6 @@
 		A482300D2B099A0E009CBE83 /* StartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartView.swift; sourceTree = "<group>"; };
 		A4CCA01C2B0A35700066D6E9 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		A4CCA01E2B0A357D0066D6E9 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		A4CCA0202B0A35E00066D6E9 /* PasswordForgotView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordForgotView.swift; sourceTree = "<group>"; };
 		A4D41E462B0991090033AB3E /* PantryChef.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PantryChef.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A4D41E492B0991090033AB3E /* PantryChefApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PantryChefApp.swift; sourceTree = "<group>"; };
 		A4D41E4B2B0991090033AB3E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -128,7 +126,6 @@
 				A482300D2B099A0E009CBE83 /* StartView.swift */,
 				A4CCA01C2B0A35700066D6E9 /* SignUpView.swift */,
 				A4CCA01E2B0A357D0066D6E9 /* HomeView.swift */,
-				A4CCA0202B0A35E00066D6E9 /* PasswordForgotView.swift */,
 				A437F6C62B0AC58B00F81A89 /* GoogleService-Info.plist */,
 				A437F6D12B0ACCEA00F81A89 /* AuthenticationManager.swift */,
 				A437F6D32B0ACF2F00F81A89 /* SignInEmailViewModel.swift */,
@@ -304,7 +301,6 @@
 			files = (
 				A4D41E742B0992520033AB3E /* LoginView.swift in Sources */,
 				A437F6D22B0ACCEA00F81A89 /* AuthenticationManager.swift in Sources */,
-				A4CCA0212B0A35E00066D6E9 /* PasswordForgotView.swift in Sources */,
 				A4CCA01D2B0A35700066D6E9 /* SignUpView.swift in Sources */,
 				A437F6D62B0AD6E300F81A89 /* RootView.swift in Sources */,
 				A4D41E4C2B0991090033AB3E /* ContentView.swift in Sources */,
