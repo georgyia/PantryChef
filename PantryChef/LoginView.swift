@@ -63,7 +63,7 @@ struct LoginView: View {
                         Button(action: {
                             Task{
                                 do{
-                                    try await viewModel.resetPassword(email: viewModel.email)
+                                    try await viewModel.resetForgottenPassword(email: viewModel.email)
                                 }catch{
                                     print(error)
                                 }

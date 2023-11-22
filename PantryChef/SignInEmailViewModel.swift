@@ -39,7 +39,7 @@ class SignInEmailViewModel: ObservableObject{
     }
     
     // Function to reset the password for the authenticated user.
-    func resetPassword(email: String) async throws {
+    func resetForgottenPassword(email: String) async throws {
         try await AuthenticationManager.shared.resetPassword(email: email)
     }
     

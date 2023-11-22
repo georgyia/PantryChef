@@ -7,10 +7,22 @@
 
 import SwiftUI
 
+// ViewModel for handling settings related tasks.
 @MainActor
 class SettingsViewModel: ObservableObject{
+    // Function to sign out the current user.
     func signOut() throws {
         try AuthenticationManager.shared.signOut()
+    }
+    // Function to reset the password for the current user.
+    func resetPassword() async throws {
+        let authUser = try AuthenticationManager.shared.getAuthenticatedUser()
+        
+        guard let email = authUser.email else {
+            throw URLError(.fileDoesNotExist)
+        }
+        
+        try await AuthenticationManager.shared.resetPassword(email: email)
     }
 }
 
@@ -23,12 +35,15 @@ struct Dish: Identifiable {
 struct HomeView: View {
     
     @StateObject private var viewModel = SettingsViewModel()
+    
+    // Binding to control the visibility of the sign in view.
     @Binding var showSignInView: Bool
     
     @State private var selectedTab = 0
     @State private var searchText = ""
     @State private var selectedCategory = "All"
     
+    // Categories and dishes for the home view.
     let categories = ["All", "Italian", "French", "Greek", "Chinese", "German", "Indian"]
     let dishes: [String: [Dish]] = [
         "Italian": [Dish(name: "Pizza", image: "pizzaImage"), Dish(name: "Pasta", image: "pastaImage")],
@@ -38,6 +53,7 @@ struct HomeView: View {
     var body: some View {
         VStack {
             if selectedTab == 0 {
+                // Greeting and search bar.
                 HStack {
                     Text("Hello Georgy")                    .font(.custom("Poppins", size: 25))
                         .foregroundColor(.black)
@@ -74,8 +90,9 @@ struct HomeView: View {
                         )
                         .padding(.leading, 20)
                     Spacer()
+                    // Filter button.
                     Button(action: {
-                        // Filter action
+                        // Filter
                     }) {
                         Image(systemName: "line.horizontal.3.decrease.circle")
                             .resizable()
@@ -91,16 +108,21 @@ struct HomeView: View {
                 .padding(.top, 20)
             }
             
-            
+            // TabView for Home and Settings.
             TabView(selection: $selectedTab) {
+                // Home tab.
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 15) {
+                        // Loop through each category.
                         ForEach(categories, id: \.self) { category in
                             VStack {
+                                // Horizontal scroll view for each category.
                                 ScrollView(.horizontal, showsIndicators: false) {
                                     HStack {
+                                        // Loop through each category for the button.
                                         ForEach(categories, id: \.self) { category in
                                             Button(action: {
+                                                // Set the selected category when a category button is clicked.
                                                 selectedCategory = category
                                             }) {
                                                 Text(category)
@@ -115,11 +137,13 @@ struct HomeView: View {
                                     .padding(.leading)
                                 }
                                 
+                                // Grid layout for the dishes.
                                 let columns = [
                                     GridItem(.flexible(), spacing: 20),
                                     GridItem(.flexible(), spacing: 20)
                                 ]
-
+                                
+                                // Determine the current dishes based on the selected category.
                                 var currentDishes: [Dish] {
                                     if selectedCategory == "All" {
                                         return dishes.values.flatMap { $0 }
@@ -127,9 +151,11 @@ struct HomeView: View {
                                         return dishes[selectedCategory] ?? []
                                     }
                                 }
-
+                                
+                                // Vertical scroll view for the dishes.
                                 ScrollView(.vertical, showsIndicators: false) {
                                     LazyVGrid(columns: columns, spacing: 20) {
+                                        // Loop through each dish in the current dishes.
                                         ForEach(currentDishes, id: \.id) { dish in
                                             VStack {
                                                 Image(dish.image)
@@ -161,8 +187,17 @@ struct HomeView: View {
                 }
                 .tag(0)
                 
-                
+                // Settings tab.
                 List{
+                    Button("Reset password"){
+                        Task{
+                            do{
+                                try await viewModel.resetPassword()
+                            } catch {
+                                print(error)
+                            }
+                        }
+                    }.foregroundColor(Color(red: 113/255, green: 177/255, blue: 161/255))
                     Button("Log out"){
                         Task{
                             do{
